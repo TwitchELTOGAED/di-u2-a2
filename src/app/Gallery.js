@@ -1,57 +1,61 @@
 import { getImageUrl } from './utils.js';
 
+function Profile({ person, imageSize = 70 }) {
+  const imageSrc = getImageUrl(person)
+
+  return (
+    <section className="profile">
+      <h2>{person.name}</h2>
+      <img
+        className="avatar"
+        src={imageSrc}
+        alt={person.name}
+        width={imageSize}
+        height={imageSize}
+      />
+      <ul>
+        <li>
+          <b>Profesión:</b> {person.profession}
+        </li>
+        <li>
+          <b>Premios: {person.awards.length} </b>
+          ({person.awards.join(', ')})
+        </li>
+        <li>
+          <b>Descubrió: </b>
+          {person.discovery}
+        </li>
+      </ul>
+    </section>
+  )
+}
+
 export default function Gallery() {
   return (
     <div>
       <h1>Científicos Notables</h1>
-      <section className="profile">
-        <h2>Maria Skłodowska-Curie</h2>
-        <img
-          className="avatar"
-          src={getImageUrl('szV5sdG')}
-          alt="Maria Skłodowska-Curie"
-          width={70}
-          height={70}
-        />
-        <ul>
-          <li>
-            <b>Profesión: </b> 
-            física y química
-          </li>
-          <li>
-            <b>Premios: 4 </b> 
-            (Premio Nobel de Física, Premio Nobel de Química, Medalla Davy, Medalla Matteucci)
-          </li>
-          <li>
-            <b>Descubrió: </b>
-            polonio (elemento químico)
-          </li>
-        </ul>
-      </section>
-      <section className="profile">
-        <h2>Katsuko Saruhashi</h2>
-        <img
-          className="avatar"
-          src={getImageUrl('YfeOqp2')}
-          alt="Katsuko Saruhashi"
-          width={70}
-          height={70}
-        />
-        <ul>
-          <li>
-            <b>Profesión: </b> 
-            geoquímica
-          </li>
-          <li>
-            <b>Premios: 2 </b> 
-            (Premio Miyake de geoquímica, Premio Tanaka)
-          </li>
-          <li>
-            <b>Descubrió: </b>
-            un método para medir el dióxido de carbono en el agua de mar
-          </li>
-        </ul>
-      </section>
+      <Profile person={{
+        imageId: 'szV5sdG',
+        name: 'Maria Skłodowska-Curie',
+        profession: 'física y química',
+        discovery: 'polonio (elemento químico)',
+        awards: [
+          'Premio Nobel de Física',
+          'Premio Nobel de Química',
+          'Medalla Davy',
+          'Medalla Matteucci'
+        ],
+      }} />
+      <Profile person={{
+        imageId: 'YfeOqp2',
+        name: 'Katsuko Saruhashi',
+        profession: 'geoquímico',
+        discovery: 'un método para medir el dióxido de carbono en el agua de mar',
+        awards: [
+          'Premio Miyake de geoquímica',
+          'Premio Tanaka'
+        ],
+      }} />
     </div>
   );
 }
